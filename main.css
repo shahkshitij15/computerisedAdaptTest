@@ -1,0 +1,32 @@
+.navbar{
+    border-radius : 0px !important;
+    background-color: #1e1e1e !important;
+    margin-bottom: 0px !important;
+    border: 0px !important;
+
+}
+
+.banner{
+    position: relative;
+    padding: 0px !important;
+    background-color: black;
+}
+
+.banner img{
+    opacity: 0.5;
+}
+
+.banner h3{
+    color: aliceblue;
+}
+
+.banner p{
+    color: aliceblue;
+}
+
+.topright{
+    position:absolute;
+    top:10%;
+    right: 20%;
+    
+}
