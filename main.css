@@ -1,3 +1,8 @@
+body{
+    overflow-wrap: hidden;
+}
+
+
 .navbar{
     border-radius : 0px !important;
     background-color: #1e1e1e !important;
@@ -10,6 +15,9 @@
     position: relative;
     padding: 0px !important;
     background-color: black;
+    
+
+     
 }
 
 .banner img{
@@ -24,9 +32,43 @@
     color: aliceblue;
 }
 
-.topright{
-    position:absolute;
-    top:10%;
-    right: 20%;
+.tc{
     
+    background-image:url('electronics-furniture-hands-953216.jpg');
+    width: 100%;
+    height : 800px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.whycat .row{
+    padding: 15px;
+
+}
+
+.whycat .col-md-3{
+    padding: 45px;
+    color: white;
+}
+
+.whycat .col-md-3 img{
+    width: 30px;
+    height: 30px;
+}
+
+.whycat{
+    background-color:#001a4d;
+}
+
+.whycat .row img{
+    width: 50px;
+    height:50px;
+    padding: 10px;
+}
+
+.introtext{
+
 }

@@ -1,3 +1,9 @@
+<?php
+session_start();
+include_once 'class.user.php';
+$user = new User();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -35,20 +41,19 @@
                     <li class="active"><a href="#">About</a></li>
                     <li><a href="#">Take a Test</a></li>
                     <li><a href="#">Contact</a></li>
-                    <li><a href="#myModal" class="trigger-btn" data-toggle="modal"><span
-                                class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="#myModal" class="trigger-btn" data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <div class="container-fluid banner">
-        
+
         <div class="text-center container-fluid tc"></div>
-        
-        
-        <div class="container-fluid whycat" >
-			<h3 style="font-size: 30px;text-align: center;margin-bottom: -35px;padding-top: 15px;">Why Cat ?</h3>
+
+
+        <div class="container-fluid whycat">
+            <h3 style="font-size: 30px;text-align: center;margin-bottom: -35px;padding-top: 15px;">Why Cat ?</h3>
             <div class="row">
                 <div class="col-md-3 info1 text-center">
                     <div class="icon"><img src="hourglass.svg" alt="ft"></div>
@@ -96,10 +101,10 @@
                 </div>
             </div>
         </div>
-		
-		
-		<div class="container-fluid whycat" style="background-color:#1F1F1F">
-			<h3 style="font-size: 30px;text-align: center;margin-bottom: -35px;padding-top: 15px;">What is  Cat ?</h3>
+
+
+        <div class="container-fluid whycat" style="background-color:#1F1F1F">
+            <h3 style="font-size: 30px;text-align: center;margin-bottom: -35px;padding-top: 15px;">What is Cat ?</h3>
             <div class="row">
                 <div class="col-md-3 info1 text-center">
                     <div class="icon"><img src="hourglass.svg" alt="ft"></div>
@@ -148,48 +153,64 @@
             </div>
         </div>
 
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	</div>
 
-   <div id="myModal" class="modal fade">
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <div id="myModal" class="modal fade">
         <div class="modal-dialog modal-login">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <div class="avatar" style="text-align:center;">
-                        <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png" width="80px"
-                            height="80px" alt="Avatar">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png" width="80px" height="80px" alt="Avatar">
 
                         <h4 class="modal-title" style="padding-top:20px;">Member Login</h4>
                     </div>
 
                 </div>
                 <div class="modal-body">
-                    <form action="/examples/actions/confirmation.php" method="post">
+                    <form action="" name="login" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="username" placeholder="Username"
-                                required="required">
+                            <input type="text" class="form-control" name="username" placeholder="Username" required="required">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" name="password" placeholder="Password"
-                                required="required">
+                            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Login</button>
+                            <button type="submit" name="submit" value="Login" class="btn btn-primary btn-lg btn-block login-btn"></button>
                         </div>
                     </form>
+                    <p id="wrong_id"></p>
+
+                    <?php 
+                    if (isset($_REQUEST['submit'])) {
+                        extract($_REQUEST);
+                    
+                            $login = $user->check_login($username, $password);
+                            if ($login) {
+                                echo "done!";
+                            } else { ?>
+                    <script type="text/javascript">
+                        alert("Wrong credentials");
+                    </script>
+
+                    <?php 
+                }
+            } ?>
                 </div>
+
+
                 <div class="modal-footer">
                     <a href="#">Forgot Password?</a>
                 </div>
@@ -199,4 +220,4 @@
 
 </body>
 
-</html>
+</html> 
