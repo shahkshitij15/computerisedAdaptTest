@@ -36,11 +36,21 @@ class user
         session_destroy();
     }
 
+
+    public function get_details($username)
+    {
+        $sql = "SELECT * FROM student WHERE username='$username'";
+        $result = mysqli_query($this->db, $sql) or die(mysqli_connect_errno()."Error Bitches");
+        return $result;
+        
+    }
+    
+
     
     public function check_login($username, $password)
     {
         //$password=md5($password);
-        $sql2 = "SELECT username from users WHERE username='$username' and pwd='$password'";
+        $sql2 = "SELECT * from users WHERE username='$username' and pwd='$password'";
         $result = mysqli_query($this->db, $sql2);
         $user_data = mysqli_fetch_array($result);
         $count_row = $result->num_rows;
@@ -48,6 +58,7 @@ class user
         if ($count_row == 1) {
                 $_SESSION['login'] = true;
                 $_SESSION['username'] = $user_data['username'];
+                $_SESSION['category'] = $user_data['category'];
                 return true;
             } else {
                 return false;

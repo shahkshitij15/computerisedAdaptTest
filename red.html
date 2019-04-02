@@ -1,22 +1,22 @@
-<?php
-session_start();
-include_once 'class.user.php';
-$user = new User();
-?>
-
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>CAT</title>
+    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
- 
+    <script src="main.js"></script>
 </head>
 
 <body>
@@ -35,23 +35,20 @@ $user = new User();
                     <li class="active"><a href="#">About</a></li>
                     <li><a href="#">Take a Test</a></li>
                     <li><a href="#">Contact</a></li>
-                    <li><a href="#myModal" class="trigger-btn" data-toggle="modal"><span class="	glyphicon glyphicon-user"></span> Login</a></li>
-                    <li><a href="index.php?q=logout" class="trigger-btn"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                    <li><a href="#myModal" class="trigger-btn" data-toggle="modal"><span
+                                class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <div class="container-fluid banner">
-
-        <div class="text-center container-fluid" id="tc">
-        <h1 style="padding:350px;font-size:60px;color:white;">Computerised Adaptive Testing<br>The future of Exams</h1>
         
-        </div>
-
-
-        <div class="container-fluid whycat">
-            <h3 style="font-size: 30px;text-align: center;margin-bottom: -35px;padding-top: 15px;">Why Cat ?</h3>
+        <div class="text-center container-fluid tc"></div>
+        
+        
+        <div class="container-fluid whycat" >
+			<h3 style="font-size: 30px;text-align: center;margin-bottom: -35px;padding-top: 15px;">Why Cat ?</h3>
             <div class="row">
                 <div class="col-md-3 info1 text-center">
                     <div class="icon"><img src="hourglass.svg" alt="ft"></div>
@@ -99,10 +96,10 @@ $user = new User();
                 </div>
             </div>
         </div>
-
-
-        <div class="container-fluid whycat" style="background-color:#1F1F1F">
-            <h3 style="font-size: 30px;text-align: center;margin-bottom: -35px;padding-top: 15px;">What is Cat ?</h3>
+		
+		
+		<div class="container-fluid whycat" style="background-color:#1F1F1F">
+			<h3 style="font-size: 30px;text-align: center;margin-bottom: -35px;padding-top: 15px;">What is  Cat ?</h3>
             <div class="row">
                 <div class="col-md-3 info1 text-center">
                     <div class="icon"><img src="hourglass.svg" alt="ft"></div>
@@ -151,75 +148,48 @@ $user = new User();
             </div>
         </div>
 
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</div>
 
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-
-    <div id="myModal" class="modal fade">
+   <div id="myModal" class="modal fade">
         <div class="modal-dialog modal-login">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <div class="avatar" style="text-align:center;">
-                        <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png" width="80px" height="80px" alt="Avatar">
+                        <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png" width="80px"
+                            height="80px" alt="Avatar">
 
                         <h4 class="modal-title" style="padding-top:20px;">Member Login</h4>
                     </div>
 
                 </div>
                 <div class="modal-body">
-                    <form action="" name="login" method="post">
+                    <form action="/examples/actions/confirmation.php" method="post">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+                            <input type="text" class="form-control" name="username" placeholder="Username"
+                                required="required">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                            <input type="password" class="form-control" name="password" placeholder="Password"
+                                required="required">
                         </div>
                         <div class="form-group">
-                            <button type="submit" name="submit" value="Login" class="btn btn-primary btn-lg btn-block login-btn">Login</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Login</button>
                         </div>
                     </form>
-                    <p id="wrong_id"></p>
-
-                    <?php 
-                    if (isset($_REQUEST['submit'])) {
-                        extract($_REQUEST);
-                    
-                            $login = $user->check_login($username, $password);
-                            if ($login) {
-                                if($_SESSION['category']==1)
-                                {
-                                    echo "<script>location='student.php'</script>";
-                                }
-                                if($_SESSION['category']==2)
-                                {
-                                    echo "teacher";
-                                }
-                                if($_SESSION['category']==3)
-                                {
-                                    echo "admin";
-                                }
-                            } else { ?>
-                    <script type="text/javascript">
-                        alert("Wrong credentials");
-                    </script>
-
-                    <?php 
-                }
-            } ?>
                 </div>
-
-
                 <div class="modal-footer">
                     <a href="#">Forgot Password?</a>
                 </div>
@@ -229,4 +199,4 @@ $user = new User();
 
 </body>
 
-</html> 
+</html>

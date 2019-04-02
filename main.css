@@ -14,15 +14,12 @@ body{
 .banner{
     position: relative;
     padding: 0px !important;
-    background-color: black;
+    
     
 
      
 }
 
-.banner img{
-    opacity: 0.5;
-}
 
 .banner h3{
     color: aliceblue;
@@ -32,9 +29,8 @@ body{
     color: aliceblue;
 }
 
-.tc{
-    
-    background-image:url('electronics-furniture-hands-953216.jpg');
+#tc{
+    background-image: url('electronics-furniture-hands-953216.jpg');
     width: 100%;
     height : 800px;
     background-attachment: fixed;
