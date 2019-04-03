@@ -65,6 +65,25 @@ class user
             }
     }
 
+    public function check_answer($choice)
+    {
+        $sql = "SELECT * FROM maths where answer='$choice'";
+        $result = mysqli_query($this->db,$sql);
+        $count_row = $result->num_rows;
+        if($count_row==1)
+            return true;
+        else   
+            return false;
+    }
+
+
+
+
+
+
+
+
+
 
     /* public function add_room($roomname, $room_qnty, $no_bed, $bedtype,$facility,$price)
             {
