@@ -3,13 +3,15 @@ include "db_config.php";
 class user
 {
     public $db;
+
     public function __construct()
     {
+        
         $this->db = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, 'cat');
         if (mysqli_connect_errno()) {
-                echo "Error: Could not connect to database.";
-                exit;
-            }
+            echo "Error: Could not connect to database.";
+            exit;
+        }
     }
     public function reg_user($name, $username, $password, $email)
     {
@@ -18,12 +20,12 @@ class user
         $check = $this->db->query($sql);
         $count_row = $check->num_rows;
         if ($count_row == 0) {
-                $sql1 = "INSERT INTO manager SET uname='$username', upass='$password', fullname='$name', uemail='$email'";
-                $result = mysqli_query($this->db, $sql1) or die(mysqli_connect_errno() . "Data cannot inserted");
-                return $result;
-            } else {
-                return false;
-            }
+            $sql1 = "INSERT INTO manager SET uname='$username', upass='$password', fullname='$name', uemail='$email'";
+            $result = mysqli_query($this->db, $sql1) or die(mysqli_connect_errno() . "Data cannot inserted");
+            return $result;
+        } else {
+            return false;
+        }
     }
 
     public function get_session()
@@ -36,17 +38,55 @@ class user
         session_destroy();
     }
 
+    public function check_answer($qid,$choice)
+    {
+        $sql = "SELECT * FROM maths where q_id='$qid' and answer='$choice'";
+        $result = mysqli_query($this->db, $sql);
+        $count_row = $result->num_rows;
+        if ($count_row == 1)
+            return 1;
+        else
+            return 0;
+    }
+
+    public function submit_answer($count,$qid,$selected)
+    {
+        $user = new User();
+        $ans=$user->check_answer($qid,$selected);
+        $sql = "insert into temp(count,qid,response,flag) values('$count','$qid','$selected','$ans')";
+        $result = mysqli_query($this->db, $sql) or die(mysqli_connect_errno() ."dcsddData cannot inserted");
+        
+        return $result;
+        
+
+    }
+
 
     public function get_details($username)
     {
         $sql = "SELECT * FROM student WHERE username='$username'";
-        $result = mysqli_query($this->db, $sql) or die(mysqli_connect_errno()."Error Bitches");
+        $result = mysqli_query($this->db, $sql) or die(mysqli_connect_errno() . "Error Bitches");
+        return $result;
+    }
+
+    public function get_question($diff)
+    {
+        $sql = "select * from maths where q_id not in(select qid from temp) and value='$diff' ORDER BY RAND() LIMIT 1";
+        $result = mysqli_query($this->db, $sql) or die(mysqli_connect_errno() . "Error Bitches");
+        return $result;
+    }
+
+    public function insert_qr($count,$qid)
+    {
+        $sql ="insert into temp (count,qid,response) values('$count','$qid','')";
+       
+        $result = mysqli_query($this->db, $sql) or die(mysqli_connect_errno() . "sssssData cannot inserted");
+
         return $result;
         
     }
-    
 
-    
+
     public function check_login($username, $password)
     {
         //$password=md5($password);
@@ -56,25 +96,22 @@ class user
         $count_row = $result->num_rows;
 
         if ($count_row == 1) {
-                $_SESSION['login'] = true;
-                $_SESSION['username'] = $user_data['username'];
-                $_SESSION['category'] = $user_data['category'];
-                return true;
-            } else {
-                return false;
-            }
+            $_SESSION['login'] = true;
+            $_SESSION['username'] = $user_data['username'];
+            $_SESSION['category'] = $user_data['category'];
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public function check_answer($choice)
+    public function clear_temp()
     {
-        $sql = "SELECT * FROM maths where answer='$choice'";
-        $result = mysqli_query($this->db,$sql);
-        $count_row = $result->num_rows;
-        if($count_row==1)
-            return true;
-        else   
-            return false;
+        $sql = "truncate table temp";
+        $result = mysqli_query($this->db,$sql) or die(mysqli_connect_errno() . "Temp cannot be deleted");
     }
+
+
 
 
 
@@ -222,12 +259,4 @@ class user
                 
 
             }*/
-
-
-
-
-
-
-
 }
- 

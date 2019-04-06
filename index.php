@@ -16,7 +16,7 @@ $user = new User();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
- 
+
 </head>
 
 <body>
@@ -45,8 +45,8 @@ $user = new User();
     <div class="container-fluid banner">
 
         <div class="text-center container-fluid" id="tc">
-        <h1 style="padding:350px;font-size:60px;color:white;">Computerised Adaptive Testing<br>The future of Exams</h1>
-        
+            <h1 style="padding:350px;font-size:60px;color:white;">Computerised Adaptive Testing<br>The future of Exams</h1>
+
         </div>
 
 
@@ -191,32 +191,29 @@ $user = new User();
                     </form>
                     <p id="wrong_id"></p>
 
-                    <?php 
+                    <?php
                     if (isset($_REQUEST['submit'])) {
                         extract($_REQUEST);
-                    
-                            $login = $user->check_login($username, $password);
-                            if ($login) {
-                                if($_SESSION['category']==1)
-                                {
+
+                        $login = $user->check_login($username, $password);
+                        if ($login) {
+                            if ($_SESSION['category'] == 1) {
                                     echo "<script>location='student.php'</script>";
                                 }
-                                if($_SESSION['category']==2)
-                                {
+                            if ($_SESSION['category'] == 2) {
                                     echo "teacher";
                                 }
-                                if($_SESSION['category']==3)
-                                {
+                            if ($_SESSION['category'] == 3) {
                                     echo "admin";
                                 }
-                            } else { ?>
-                    <script type="text/javascript">
-                        alert("Wrong credentials");
-                    </script>
+                        } else { ?>
+                            <script type="text/javascript">
+                                alert("Wrong credentials");
+                            </script>
 
-                    <?php 
-                }
-            } ?>
+                                <?php
+                        }
+                    } ?>
                 </div>
 
 
@@ -229,4 +226,4 @@ $user = new User();
 
 </body>
 
-</html> 
+</html>
